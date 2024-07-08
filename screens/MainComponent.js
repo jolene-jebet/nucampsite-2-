@@ -1,28 +1,51 @@
-import { useState } from 'react';
-import { CAMPSITES } from '../shared/campsites';
 import DirectoryScreen from './DirectoryScreen';
 import { View } from 'react-native';
 import CampsiteInfoScreen from './CampsiteInfoScreen';
+import { Platform, View } from 'react-native';
+import Constants from 'expo-constants';
+import { createStackNavigator } from '@react-navigation/stack';
 
+
+const DirectoryNavigator = () => {
+    const Stack = createStackNavigator();
+
+    return(
+        <Stack.Navigator 
+            initialRouteName='Directory'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#5637DD'
+                },
+                headerTintColor: '#fff'
+            }}
+            
+        >
+            <Stack.Screen
+                name='Directory'
+                component={DirectoryScreen}
+                options={{title: 'Campsite Directory'}}
+            />
+
+            <Stack.Screen
+                name = 'Campsite Directory'
+                component={CampsiteInfoScreen}
+                options={({ route }) => ({
+                    title: route.params.campsite.name
+                })}/>
+                
+        </Stack.Navigator>
+    );
+}
 const Main = () => {
-    //creating a state variable using destricturing syntax
-    const[ campsites, setCampsites ] = useState(CAMPSITES);
-    //empty parenthesis initializes the variable to undefined
-    const [ selectedCampsiteId, setSelectedCampsiteId ] = useState();
 
     return (
-        <View style = {{ flex: 1 }}>
-            <DirectoryScreen 
-                campsites = {campsites}
-                onPress = {campsiteId => setSelectedCampsiteId(campsiteId)} />
-            <CampsiteInfoScreen 
-            // checks to ensure rendering of the campsite that is selected using id
-                campsite = {
-                    campsites.filter(campsite => campsite.id === selectedCampsiteId)
-                    //since filter returns an new array containing the item selected, we put the zero thing so that it displays the fist item in the array
-                    [0]
-                }    
-            />
+        <View 
+            style = {{ 
+                flex: 1,
+                paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+            }}
+         >
+          <DirectoryNavigator />
         </View>
         
     );
