@@ -55,9 +55,11 @@ const HomeScreen = () => {
     return (
         //scrollview will be used to render our featured item cards 
         <ScrollView>
+
             <FeaturedItem item={featCampsite} />
             <FeaturedItem item={featPromotion} />
             <FeaturedItem item={featPartner} />
+            
         </ScrollView>
     );
 }
