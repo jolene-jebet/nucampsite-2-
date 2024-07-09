@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { CAMPSITES } from '../shared/campsites';
-import { PROMORIONS } from '../shared/promotions';
+import { PROMOTIONS } from '../shared/promotions';
 import { PARTNERS } from '../shared/partners';
 
 const FeaturedItem = ({ item }) => {
