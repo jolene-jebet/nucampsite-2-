@@ -31,6 +31,33 @@ const HomeNavigator = () => {
     );
 }
 
+const AboutNavigator = () => {
+    const Stack = createStackNavigator();
+
+    return(
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='About'
+                component={AboutScreen}
+                options={{ title: 'About' }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+const ContactNavigator  = () => {
+    const Stack = createStackNavigator();
+
+    return(
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Contact'
+                component={ContactScreen}
+                options={{ title: 'Home' }}
+            />
+        </Stack.Navigator>
+    );
+}
 
 //a functional component to return our stack navigator code for directory and campsite info screens
 //navigator for the directory screen
@@ -95,6 +122,18 @@ const Main = () => {
                 name='DirectoryNav'
                 component={DirectoryNavigator}
                 options={{ title: 'Directory' }}
+            />
+
+            <Drawer.Screen
+                name='AboutNav'
+                component={AboutNavigator}
+                options={{ title: 'About' }}
+            />
+
+            <Drawer.Screen
+                name='ContactNav'
+                component={ContactNavigator}
+                options={{ title: 'Contact' }}
             />
 
           </Drawer.Navigator>
