@@ -31,25 +31,36 @@ const HomeNavigator = () => {
     );
 }
 
+
+//a functional component to return our stack navigator code for directory and campsite info screens
 //navigator for the directory screen
 const DirectoryNavigator = () => {
+    //holds the object from the stacknavigator
+    //returns the screen and navigator which are both react components
     const Stack = createStackNavigator();
 
     return(
+        //returning our navigator code
         <Stack.Navigator 
+            //default route when our navigation loads
             initialRouteName='Directory'
+            //defines the look and feel of the nav header
             screenOptions={screenOptions}
             
         >
             <Stack.Screen
+                //name of the screen
                 name='Directory'
+                //component in charge of displaying the directory screen
                 component={DirectoryScreen}
+                //title to be displayed in the navigation header 
                 options={{title: 'Campsite Directory'}}
             />
-
+            {/* screen for the campsite info */}
             <Stack.Screen
                 name = 'CampsiteInfo'
                 component={CampsiteInfoScreen}
+                //sets the title of the campsite screen to the name of the specific campsite
                 options={({ route }) => ({
                     title: route.params.campsite.name
                 })}/>
@@ -57,6 +68,7 @@ const DirectoryNavigator = () => {
         </Stack.Navigator>
     );
 }
+
 const Main = () => {
 
     return (
