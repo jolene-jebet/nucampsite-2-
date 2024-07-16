@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native';
-import { Card } from 'react-native-elements';
+import { Text, View, StyleSheet } from 'react-native';
+import { Card, Icon } from 'react-native-elements';
 
 const RenderCampsite = ({ campsite }) => {
     //conditional rendering
@@ -8,7 +8,7 @@ const RenderCampsite = ({ campsite }) => {
         //what to be rendered if its truthy
         return(
             // card containing more details about the campsites selected
-            <Card containerStyle={{padding : 0}}>
+            <Card containerStyle={StyleSheet.cardContainer}>
                 <Card.Image source={campsite.image}>
                     <View style={{ justifyContent: 'center', flex: 1}}>
                         <Text 
@@ -25,11 +25,29 @@ const RenderCampsite = ({ campsite }) => {
                 </Card.Image>
 
                 <Text style={{ margin: 20 }}>{campsite.description}</Text>
+
+                <Icon
+                    name ='heart-o'
+                    type='font-awesome'
+                    color='#f50'
+                    // a boolean prop and this gives the shadow effect
+                    raised
+                    //also boolean prop reverses the color scheme ... if its white in red out it will be vice versa
+                    reverse
+                />
             </Card>
         );
         //if falsy it returns..
         return <View />;
     }
 }
+
+const styles = StyleSheet.create({
+    cardContainer: {
+        padding: 0,
+        margin: 0,
+        marginBottom: 20
+    }
+})
 
 export default RenderCampsite;
