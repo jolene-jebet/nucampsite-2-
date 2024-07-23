@@ -1,17 +1,15 @@
-import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
-import { CAMPSITES } from '../shared/campsites';
-import { PROMOTIONS } from '../shared/promotions';
-import { PARTNERS } from '../shared/partners';
+import { useSelector } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 
 const FeaturedItem = ({ item }) => {
     //this is for conditional rendering
     if(item){
         return(
             <Card containerStyle={{padding: 0}}>
-                <Card.Image source={item.image}>
+                <Card.Image source={{uri: baseUrl + item.image}}>
                     <View 
                         style={{
                             justifyContent: 'center',
@@ -42,15 +40,15 @@ const FeaturedItem = ({ item }) => {
 
 const HomeScreen = () => {
 
-    const[ campsites, setCampsited ] = useState(CAMPSITES);
-    const [promotions, setPromotions] = useState(PROMOTIONS);
-    const [partners, setPartners] = useState(PARTNERS);
+    const campsites = useSelector((state) => state.campsites);
+    const promotions = useSelector((state) => state.promotions);
+    const partners = useSelector((state) => state.partners);   
 
     //a constant for the featured campsites object
-    const featCampsite = campsites.find((item) => item.featured);
+    const featCampsite = campsites.campsitesArray.find((item) => item.featured);
     //constants for holding featured partner and featured promotion
-    const featPromotion = promotions.find((item)=> item.featured);
-    const featPartner = partners.find((item)=> item.featured);
+    const featPromotion = promotions.promotionsArray.find((item)=> item.featured);
+    const featPartner = partners.partnersArray.find((item)=> item.featured);
 
     return (
         //scrollview will be used to render our featured item cards 
