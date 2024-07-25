@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, View} from 'react-native';
-import { COMMENTS } from '../shared/comments';
+import { useSelector } from 'react-redux';
 import RenderCampsite from '../features/campsites/RenderCampsite';
 
 const CampsiteInfoScreen = ({ route }) => {
     
     const { campsite } = route.params;
 
-    const [comments, setComments] = useState(COMMENTS);
+    const comments = useSelector((state) => state.comments);
     const [ favorite, setFavorite ] = useState(false);
 
     //renders the comments 
@@ -25,7 +25,7 @@ const CampsiteInfoScreen = ({ route }) => {
         //flatlist has to be the top component so as to calculate scroll height accurately
         <FlatList
         // getting specific comments of campsite required
-            data = {comments.filter((comment) => comment.campsiteId === campsite.id)}
+            data = {comments.commentsArray.filter((comment) => comment.campsiteId === campsite.id)}
             renderItem={renderCommentItem}
             //all comments have a unique id
             keyExtractor={(item) => item.id.toString()}
